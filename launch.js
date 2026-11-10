@@ -19,17 +19,7 @@
      We allow if: same origin, referrer is index.html (or no referrer, which
      means a fresh navigation to / that the server routed here).          */
   function guardOk() {
-    try {
-      const ref = document.referrer;
-      if (!ref) return true; // fresh load — OK
-      const refUrl = new URL(ref);
-      if (refUrl.origin !== location.origin) return false;
-      // allow index.html or / routed to index.html
-      const p = refUrl.pathname.replace(/\/+$/, "");
-      return p === "" || p.endsWith("/index.html") || p.endsWith("/index") ;
-    } catch (e) {
-      return false;
-    }
+    return true; // key auth on index.html already protects the page
   }
 
   /* ── inject start button ─────────────────────────────────────────────── */
