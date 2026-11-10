@@ -8,16 +8,11 @@
   "use strict";
 
   const COUNTDOWN_SEC = 5;
-  const DEST = "go.html";
+  const DEST = "launch.html?v=1402s&log=1&afterglow=run&mode=kpstep&g=drain:16&g=drainsz:0x4000";
 
   const countEl = document.getElementById("count"); // <p class="status" id="count">
   const content = document.querySelector(".content");
 
-  /* ── referrer guard ──────────────────────────────────────────────────────
-     The PS4 browser restores its last session on cold start. Without this,
-     a page left open would refire the exploit with nobody watching.
-     We allow if: same origin, referrer is index.html (or no referrer, which
-     means a fresh navigation to / that the server routed here).          */
   function guardOk() {
     return true; // key auth on index.html already protects the page
   }
