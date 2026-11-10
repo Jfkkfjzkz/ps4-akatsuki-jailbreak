@@ -25,6 +25,10 @@
     if (key) { try { ok = HASHES.includes(await sha256(key)); } catch (e) {} }
     if (ok) {
       document.body.style.visibility = '';
+      // load scripts only after auth passes
+      ['matrix.js','launch.js'].forEach(function(src){
+        var s=document.createElement('script'); s.src=src; document.body.appendChild(s);
+      });
     } else {
       document.body.innerHTML =
         '<canvas id="matrix"></canvas>' +
@@ -80,7 +84,5 @@
       <p class="status" id="count">[ INITIALIZING... ]</p>
     </div>
 
-    <script src="matrix.js"></script>
-    <script src="launch.js"></script>
   </body>
 </html>
