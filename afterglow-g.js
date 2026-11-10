@@ -1214,7 +1214,10 @@ async function loadKpayloadSteps(k, kbase, room) {
   const saySync = function (m) { try { const x = new XMLHttpRequest(); x.open("GET", "ag_log?m=" + encodeURIComponent(m), false); x.send(); } catch (e) {} };
 
   say("[kp] kernel base " + text(kbase) + ", padding " + text(t));
-  if (!(await runPatchSet(room))) return false;
+  // patchset.bin skipped for FW 14.02: its hardcoded offsets are FW 14.00 only
+  // and writing JMP [RSI] (FF 26) to the wrong kernel address causes a kernel panic.
+  // GoldHEN's own KP_STEPS (patch groups 1-6) apply all required kernel patches
+  // themselves with the correct offsets derived from the shiftfit at stage [7b].
   const dmapPad = paddingRW(k, kbase);
   if (!dmapPad) { say("[kp] stopping: padding setup failed"); return false; }
 
