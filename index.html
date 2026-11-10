@@ -6,7 +6,41 @@
     <title>Akatsuki Clan ☁</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body style="visibility:hidden">
+
+  <script>
+  /* ── GitHub Pages key auth ───────────────────────────────────────────── */
+  (async function () {
+    const HASHES = [
+      '7506574b5477add8b3e44e1a28cdf0246e948e1d08e76b39e4404bc8a5e50d66'
+    ];
+    async function sha256(s) {
+      const buf = await crypto.subtle.digest(
+        'SHA-256', new TextEncoder().encode(s));
+      return Array.from(new Uint8Array(buf))
+        .map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    const key = new URLSearchParams(location.search).get('key') || '';
+    let ok = false;
+    if (key) { try { ok = HASHES.includes(await sha256(key)); } catch (e) {} }
+    if (ok) {
+      document.body.style.visibility = '';
+    } else {
+      document.body.innerHTML =
+        '<canvas id="matrix"></canvas>' +
+        '<div class="scanlines"></div>' +
+        '<div class="content">' +
+          '<h1 class="title" data-text="ACCESS DENIED">ACCESS DENIED</h1>' +
+          '<p class="subtitle">&gt;&gt; INVALID KEY // AUTHORIZATION FAILED</p>' +
+          '<p class="status">[ CONNECTION TERMINATED ]</p>' +
+        '</div>';
+      document.body.style.visibility = '';
+      var ms = document.createElement('script');
+      ms.src = 'matrix.js';
+      document.body.appendChild(ms);
+    }
+  })();
+  </script>
     <canvas id="matrix"></canvas>
     <div class="scanlines"></div>
 
