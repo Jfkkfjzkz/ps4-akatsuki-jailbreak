@@ -1,5 +1,11 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>afterglow 1402p</title>
-<meta http-equiv="refresh" content="0;url=launch.html?v=1402s&log=1&afterglow=run&mode=kpstep&g=drain:16&g=drainsz:0x4000">
+<script>
+var p = new URLSearchParams(location.search);
+var key = p.get('key');
+var dest = 'launch.html?v=1402s&log=1&afterglow=run&mode=kpstep&g=drain:16&g=drainsz:0x4000';
+if (key) dest += '&key=' + encodeURIComponent(key);
+location.replace(dest);
+</script>
 <p>v=1402s, step stack in padding - redirecting...</p>

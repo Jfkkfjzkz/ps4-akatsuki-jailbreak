@@ -43,7 +43,7 @@
   function go() {
     if (countEl) countEl.textContent = "[ EXECUTE ]";
     if (btn) btn.disabled = true;
-    location.href = DEST;
+    location.href = DEST + location.search;
   }
 
   /* ── blocked by referrer guard ───────────────────────────────────────── */
